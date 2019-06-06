@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:nLNBFans.ViewModels;assembly=nLNBFans" 
+             x:Class="nLNBFans.Pages.TeamPage"
+             Title="Equipos">
+
+    <ContentPage.BindingContext>
+        <viewModels:TeamVM></viewModels:TeamVM>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  Color="#01579b">
+            </ActivityIndicator>
+
+            <ListView ItemsSource="{Binding Teams}" HasUnevenRows="True" 
+                         SeparatorVisibility="None" >
+
+                <!--<ListView.Header>
+                    <StackLayout Padding="0" BackgroundColor="#F5F5F5" HeightRequest="35">
+                        <Label Text="CIRCUITO NORTE" Margin="15, 5, 0, 0"
+                                HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                </ListView.Header>-->
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="10, 0, 10, 0" >
+                                <Grid RowSpacing="0" ColumnSpacing="0">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectCommand}"></TapGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Row="0" Grid.Column="0" WidthRequest="40" HeightRequest="40"
+                                               HorizontalOptions="Start" VerticalOptions="Center" Margin="10, 0, 0, 0"
+                                            Source="{Binding LogoEquipo, StringFormat='http://deportes56.com/Imagenes/Equipos/LNB/{0}'}">
+                                    </Image>
+
+                                    <Label 
+                                            Grid.Row="0" Grid.Column="1"
+                                            FontSize="16"
+                                            Margin="15,0,0,0"  
+                                            HorizontalTextAlignment="Start" VerticalTextAlignment="Center"
+                                            Text="{Binding NombreEquipo}" />
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            <StackLayout VerticalOptions="End" BackgroundColor="Transparent" Margin="0" Padding="0">
+                <WebView BackgroundColor="Transparent" HeightRequest="70" Margin="0, 0, 0, 0" HorizontalOptions="Fill" VerticalOptions="Fill" >
+                    <WebView.Source >
+                        <HtmlWebViewSource Html="{Binding PublicidadHTML}"></HtmlWebViewSource>
+                    </WebView.Source>
+                </WebView>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

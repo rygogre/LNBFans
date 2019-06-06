@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:converters="clr-namespace:nLNBFans.Converters;assembly=nLNBFans"
+             x:Class="nLNBFans.Pages.TeamPlayerPage"
+             Title="Plantilla"
+             Icon="plantilla.png">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:URLImagenPlayer x:Key="urlImagenPlayer"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b"></ActivityIndicator>
+            <ListView ItemsSource="{Binding Players}" HasUnevenRows="True" 
+                              Margin="5" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" Margin="0, 0, 0, 5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="0, 10, 0, 10"                                    
+                                    Source="{Binding Imagen, Converter={StaticResource urlImagenPlayer}}"
+                                    WidthRequest="50" HeightRequest="50" />
+
+                                <Label TextColor="Black" FontSize="16" Margin="5, 10, 0, 0"
+                                Grid.Row="0" Grid.Column="1"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                            Text="{Binding NombreCompleto}" />
+
+                                <Label
+                                Grid.Row="1" Grid.Column="1" FontSize="11" Margin="5, 0, 0, 10"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                            Text="{Binding Posicion}" />
+
+                                <Image WidthRequest="20" HeightRequest="20" HorizontalOptions="End"                          
+                                Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Margin="0, 0, 15, 0"
+                                Source="next.png">
+                                </Image>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

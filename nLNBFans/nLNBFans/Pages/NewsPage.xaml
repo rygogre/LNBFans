@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nLNBFans.Pages.NewsPage"
+             Title="Noticas"   >
+    <ContentPage.Content>
+        <StackLayout Margin="0" Padding="0">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b"></ActivityIndicator>
+            <ListView ItemsSource="{Binding NewsAll}" HasUnevenRows="True" 
+                              Margin="5" SeparatorVisibility="None" >
+                <!--<ListView.Behaviors>
+                <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
+            </ListView.Behaviors>-->
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="2, 2, 5, 10">
+                                <Frame HasShadow="True" BackgroundColor="White" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" OutlineColor="Gray">
+                                    <Grid RowSpacing="0" ColumnSpacing="0">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                        </Grid.GestureRecognizers>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.Row="0" Grid.Column="0" Aspect="Fill" HeightRequest="150" 
+                                        Source="{Binding NombreImagen, StringFormat='http://deportes56.com/Imagenes/LNB/Detalles/{0}'}">
+                                        </Image>
+
+                                        <Label 
+                                        Grid.Row="1" Grid.Column="0"
+                                        Margin="5,5,5,2" TextColor="Black"
+                                        FontAttributes="Bold" FontSize="16"
+                                        VerticalOptions="Center" HorizontalOptions="Start"                                  
+                                        Text="{Binding Titulo}" />
+
+
+                                        <Label FontSize="11" HorizontalOptions="Start"
+                                         Margin="5,5,5,2" Grid.Row="2" Grid.Column="0"                                                              
+                                        Text="{Binding FechaPublicado}" />
+
+                                        <Image HorizontalOptions="End" Margin="0,0,10,5" HeightRequest="20" WidthRequest="20"
+                                        Grid.Row="2" Grid.Column="0"                                                         
+                                        Source="shareblack.png">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                Command="{Binding ShareCommand}" CommandParameter="{Binding .}"  />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!--<ListView.Footer>
+                <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                    -->
+                <!-- set the footer to have a zero height when invisible -->
+                <!--
+                    <Grid.Triggers>
+                        <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                            <Setter Property="HeightRequest" Value="0" />
+                        </Trigger>
+                    </Grid.Triggers>
+                    -->
+                <!-- the loading content -->
+                <!--
+                    <Label Text="Cargando..." TextColor="Blue" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                </Grid>
+            </ListView.Footer>-->
+            </ListView>
+
+            <StackLayout VerticalOptions="End" BackgroundColor="Transparent" Margin="0" Padding="0">
+                <WebView BackgroundColor="Transparent" HeightRequest="70" Margin="0, 0, 0, 0" HorizontalOptions="Fill" VerticalOptions="Fill" >
+                    <WebView.Source >
+                        <HtmlWebViewSource Html="{Binding PublicidadHTML}"></HtmlWebViewSource>
+                    </WebView.Source>
+                </WebView>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

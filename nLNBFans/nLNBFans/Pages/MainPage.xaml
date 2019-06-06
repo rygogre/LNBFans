@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:nLNBFans.Converters;assembly=nLNBFans"
+             xmlns:local="clr-namespace:nLNBFans"
+             x:Class="nLNBFans.Pages.MainPage"
+             Title="LNB Fans">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StandingDiferenciaConverter x:Key="standingDiferenciaConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="refreshToolbarItem" Text="Refresh" Icon="refreshn.png" Command="{Binding RefreshCommand}" Order="Primary" Priority="0" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <Grid BackgroundColor="#0288d1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="8*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="0" Grid.Column="0" Source="left.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Command="{Binding DateCommand}" CommandParameter="-1"  />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <DatePicker Format="dd.MM.yyyy" x:Name="gameDayDatePicker" HorizontalOptions="Center"
+                                TextColor="White" Date="{Binding Fecha}" BackgroundColor="#0288d1"                                  
+                                    Grid.Row="0" Grid.Column="1"   >
+
+
+                        <DatePicker.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Command="{Binding SelectDateCommand}">
+                            </TapGestureRecognizer>
+                        </DatePicker.GestureRecognizers>
+                    </DatePicker>
+                    <Image Grid.Row="0" Grid.Column="2" Source="right.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Command="{Binding DateCommand}" CommandParameter="1"  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                                   IsVisible="{Binding IsBusy}" 
+                                   VerticalOptions="Center" 
+                                   Color="#01579b">
+                </ActivityIndicator>
+
+                <ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding GamesDay}" RowHeight="110" HeightRequest="{Binding RowGameDay}" 
+                              Margin="2, 0, 2, 0" SeparatorVisibility="None" VerticalOptions="StartAndExpand">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="2, 3, 3, 5">
+                                    <Frame HasShadow="True" BackgroundColor="White" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" OutlineColor="Gray">
+                                        <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" Margin="0, 0, 0, 5" >
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                            </Grid.GestureRecognizers>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label FontSize="Small"
+                                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding NombreInstalacion}" />
+
+                                            <Image WidthRequest="45" HeightRequest="45"                    
+                                    Grid.Row="1" Grid.Column="0"
+                                    Source="{Binding LogoEquipo, StringFormat='http://deportes56.com/Imagenes/Equipos/LNB/{0}'}">
+                                            </Image>
+
+                                            <Label HorizontalTextAlignment="Center" FontSize="18" TextColor="Black"
+                                    Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                                    VerticalOptions="Center" HorizontalOptions="Center"                                   
+                                    Text="{Binding ScoreFinal}" />
+
+                                            <Image WidthRequest="45" HeightRequest="45"                           
+                                    Grid.Row="1" Grid.Column="2"
+                                    Source="{Binding LogoVisita, StringFormat='http://deportes56.com/Imagenes/Equipos/LNB/{0}'}">
+                                            </Image>
+
+                                            <Label FontSize="14" FontAttributes="Bold" 
+                                    Grid.Row="2" Grid.Column="0"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding Visita}" />
+
+                                            <Label FontSize="14" FontAttributes="Bold" 
+                                    Grid.Row="2" Grid.Column="2"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding Casa}" />
+
+                                            <Label FontSize="12"
+                                    Grid.Row="3" Grid.Column="0"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding RecordVisita}" />
+
+                                            <Label FontSize="12"
+                                    Grid.Row="3" Grid.Column="2"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding RecordCasa}" />
+                                        </Grid>
+                                    </Frame>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!--</StackLayout>-->
+
+            </StackLayout>
+
+            <Grid Grid.Row="2"  Grid.Column="0" RowSpacing="0" Margin="0, 0, 0, 0" HeightRequest="70" BackgroundColor="Transparent">
+
+                <WebView BackgroundColor="Transparent" HeightRequest="70" Margin="0, 0, 0, 0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
+                    <WebView.Source >
+                        <HtmlWebViewSource Html="{Binding PublicidadHTML}"></HtmlWebViewSource>
+                    </WebView.Source>
+                </WebView>
+            </Grid>
+
+
+            <StackLayout Grid.Row="3" Grid.Column="0" >
+                <Label Text="POSICIONES" TextColor="Black" Margin="20, 10, 0, 0"></Label>
+
+                <Grid BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Margin="0,5,0,0" VerticalOptions="Center" TextColor="#01579b" Grid.Column="0" Grid.Row="0" 
+                            Text="NORTE" HorizontalTextAlignment="Center" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CircuitoCommand}" CommandParameter="N" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <BoxView Color="{Binding HasBordeVisita}" HeightRequest="2"
+                          Grid.Column="0" Grid.Row="2"/>
+
+                    <Label Text="|" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="20"
+                       TextColor="#EEEEEE" Grid.Column="1" Grid.Row="0" Margin="0,5,0,0" />
+                    <!--<BoxView Color="Black" WidthRequest ="100" HeightRequest="2" Grid.Column="0" Grid.Row="2"/>-->
+
+                    <Label Margin="0,5,0,0" VerticalOptions="Center" TextColor="#01579b" Grid.Column="2" Grid.Row="0" 
+                            Text="SUROESTE" HorizontalTextAlignment="Center"  FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CircuitoCommand}" CommandParameter="S" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <BoxView Color="{Binding HasBordeCasa}" HeightRequest="2"
+                          Grid.Column="2" Grid.Row="2"/>
+
+                    <!--<BoxView Color="Black" WidthRequest ="100" HeightRequest="2" Grid.Column="1" Grid.Row="2"/>-->
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Grid.Row="4" Grid.Column="0">
+                <ActivityIndicator IsRunning="{Binding IsBusyStanding}" 
+                                   IsVisible="{Binding IsBusyStanding}" 
+                                   VerticalOptions="Center" 
+                                   Color="#01579b">
+                </ActivityIndicator>
+                <Grid BackgroundColor="#0288d1">
+
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" ></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="EQUIPOS" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="2" Text="JJ" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="3" Text="G" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="4" Text="P" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="5" Text="PTC" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="6" Text="DIF" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                </Grid>
+
+                <ListView ItemsSource="{Binding Standing}" 
+                              Margin="5, 0, 5, 0" SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid BackgroundColor="White">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectCommand}"></TapGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"></ColumnDefinition>
+                                        <ColumnDefinition Width="85"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image WidthRequest="25" HeightRequest="25"                    
+                                            Grid.Row="0" Grid.Column="0"
+                                            Source="{Binding Logo, StringFormat='http://deportes56.com/Imagenes/Equipos/LNB/{0}'}">
+                                    </Image>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding NombreEquipo}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding JJ, StringFormat='{}{0:00}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding Ganados, StringFormat='{}{0:00}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Label Grid.Row="0" Grid.Column="4" Text="{Binding Perdidos, StringFormat='{}{0:00}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Label Grid.Row="0" Grid.Column="5" Text="{Binding Porcentaje, StringFormat='{}{0:00}'}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                    <Label Grid.Row="0" Grid.Column="6" Text="{Binding Diferencia, Converter={StaticResource standingDiferenciaConverter}}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

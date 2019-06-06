@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="X5k-f2-b5h">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gAE-YM-kbH">
+            <objects>
+                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="center" id="yd7-JS-zBw" autoresizesSubviews="NO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="23" image="logo.png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" userInteractionEnabled="NO">
+                                <rect key="frame" x="238" y="278" width="60" height="60"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES" image="YES"/>
+                                </accessibility>
+                                <color key="tintColor" colorSpace="calibratedRGB" red="0.0392156862745098" green="0.37647058823529411" blue="1" alpha="1"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
+                            <constraint id="266" firstItem="yd7-JS-zBw" firstAttribute="centerY" secondItem="23" secondAttribute="centerY" constant="60"/>
+                        </constraints>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" notEnabled="YES" image="YES"/>
+                        </accessibility>
+                        <color key="tintColor" colorSpace="calibratedRGB" red="0.047058823529411764" green="0.38039215686274508" blue="0.996078431372549" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.00392156862745098" green="0.3411764705882353" blue="0.60784313725490191" alpha="1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="339"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo.png" width="300" height="325"/>
+    </resources>
+</document>

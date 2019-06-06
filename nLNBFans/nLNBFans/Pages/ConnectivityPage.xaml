@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nLNBFans.Pages.ConnectivityPage">
+    <ContentPage.Content>
+        <StackLayout x:Name="refreshStackLayout" VerticalOptions="CenterAndExpand" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer 
+                Tapped="OnTapped" 
+                NumberOfTapsRequired="1" ></TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+
+            <Image HeightRequest="100"  WidthRequest="100" HorizontalOptions="Center"
+                 Source="sad.png" >
+            </Image>
+            <Label Text="Conectividad sin detectar. Favor revisar la conexión" HorizontalOptions="Center"></Label>
+
+            <Image HeightRequest="50"  WidthRequest="50"
+                 Source="reload.png" HorizontalOptions="Center">
+            </Image>
+            <Label Text="TAP para reintentar!" HorizontalOptions="Center"></Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

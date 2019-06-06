@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nLNBFans.Pages.SchedulePage"
+             Title="Calendario">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Text="Add" Icon="filter.png" Activated="OnNewClicked" Order="Primary" Priority="0" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="{StaticResource MainColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+
+                <Picker x:Name="yearPicker" BackgroundColor="#01579b" Grid.Column="0" Grid.Row="0"
+                    Margin="15, 5, 0, 0" TextColor="White" Title="Temporada" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Picker.Items>
+                        <x:String>2018</x:String>
+                        <x:String>2017</x:String>
+                        <x:String>2016</x:String>
+                        <x:String>2015</x:String>
+                        <x:String>2014</x:String>
+                        <x:String>2013</x:String>
+                        <x:String>2012</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Picker x:Name="etapaPicker" BackgroundColor="#01579b" Grid.Column="1" Grid.Row="0" Title="Etapa" Margin="0, 5, 0, 0" TextColor="White">
+                    <Picker.Items>
+                        <x:String>S. Regular</x:String>
+                        <x:String>SemiFinal</x:String>
+                        <x:String>S. Final</x:String>
+                    </Picker.Items>
+                </Picker>
+
+
+                <Grid BackgroundColor="#0288d1" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Hora" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="1" Text="Visita" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="2" Text="Casa" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="3" Text="Result." TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Grid.Row="0" Grid.Column="4" Text=" " TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                </Grid>
+
+            </Grid>
+
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b">
+            </ActivityIndicator>
+
+
+            <ListView x:Name="calendarioListView" ItemsSource="{Binding ScheduleGrouped}" HasUnevenRows="True"
+                              Margin="0, 0, 0, 0" SeparatorVisibility="None" 
+                  IsGroupingEnabled="True"
+                  GroupDisplayBinding="{Binding Key}" >
+
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="30">
+                            <StackLayout 
+                            VerticalOptions="FillAndExpand"                            
+                            BackgroundColor="#F5F5F5">
+                                <Label Margin="5, 4, 0, 0"  FontAttributes="Bold"
+                                   HorizontalTextAlignment="Start" 
+                                   VerticalTextAlignment="Center"
+                                   Text="{Binding Key, StringFormat='{0:dd.MM.yyyy}'}"
+                                   TextColor="Gray" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="2">
+                                <Grid RowSpacing="0" ColumnSpacing="0">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                        Command="{Binding SelectCommandDetail}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label 
+                                        Grid.Row="0" Grid.Column="0"
+                                        FontSize="12"
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Center"                                  
+                                        Text="{Binding Fecha, StringFormat='{0:hh:mm}'}" />
+
+                                    <Label 
+                                        Grid.Row="0" Grid.Column="1"
+                                        
+                                       
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Start"                                  
+                                        Text="{Binding Visita}" />
+
+                                    <Label 
+                                        Grid.Row="0" Grid.Column="2"
+                                        
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Start"                                  
+                                        Text="{Binding Casa}" />
+
+                                    <Label 
+                                        Grid.Row="0" Grid.Column="3"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center"
+                                        TextColor="Black"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Start"                                  
+                                        Text="{Binding GameResult}" />
+
+                                    <Image Grid.Row="0" Grid.Column="4" Source="next.png" WidthRequest="20" HeightRequest="20"
+                                           HorizontalOptions="End" Margin="0,0,5,0">
+                                        <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding DateCommand}" CommandParameter="1"  />
+                                        </Image.GestureRecognizers>-->
+                                    </Image>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout VerticalOptions="End" BackgroundColor="Transparent" Margin="0" Padding="0">
+                <WebView BackgroundColor="Transparent" HeightRequest="70" Margin="0, 0, 0, 0" HorizontalOptions="Fill" VerticalOptions="Fill" >
+                    <WebView.Source >
+                        <HtmlWebViewSource Html="{Binding PublicidadHTML}"></HtmlWebViewSource>
+                    </WebView.Source>
+                </WebView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

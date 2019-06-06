@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nLNBFans.Pages.PreferenciasPage"
+             Title="Preferencias">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <ActivityIndicator x:Name="activityIndicator"
+                                   VerticalOptions="Center" 
+                                   Color="#01579b">
+            </ActivityIndicator>
+            <Grid RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Text="Noticas" HorizontalOptions="Start"></Label>
+                <Switch  Grid.Column="0" Grid.Row="0" x:Name="noticiasSwitch" HorizontalOptions="End"  />
+
+                <Label Grid.Column="0" Grid.Row="1" Text="Inicio Partidos" HorizontalOptions="Start"></Label>
+                <Switch  Grid.Column="0" Grid.Row="1" x:Name="inicioPartidosSwitch" HorizontalOptions="End"  />
+
+                <Label Grid.Column="0" Grid.Row="2" Text="Final Partidos" HorizontalOptions="Start"></Label>
+                <Switch  Grid.Column="0" Grid.Row="2" x:Name="finalPartidosSwitch" HorizontalOptions="End"  />
+
+                <Label Grid.Column="0" Grid.Row="3" Text="Contrataciones" HorizontalOptions="Start"></Label>
+                <Switch Grid.Column="0" Grid.Row="3" x:Name="contratacionesSwitch" HorizontalOptions="End"  />
+
+                <Label Grid.Column="0" Grid.Row="4" Text="Lesiones" HorizontalOptions="Start"></Label>
+                <Switch  Grid.Column="0" Grid.Row="4" x:Name="lesionesSwitch" HorizontalOptions="End"  />
+
+                <!--<Label Grid.Column="0" Grid.Row="5" Text="Test" HorizontalOptions="Start"></Label>
+                <Switch  Grid.Column="0" Grid.Row="5" x:Name="testSwitch" HorizontalOptions="End"  />-->
+
+            </Grid>
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

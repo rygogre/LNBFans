@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="11" android:versionName="2.0.3" package="com.lnbfans.com" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="23" />
+	<application android:label="LNB Fans"></application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

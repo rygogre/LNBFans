@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nLNBFans.Pages.TeamInformation"
+             Title="Información"
+             Icon="info.png">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b">
+            </ActivityIndicator>
+            <ListView ItemsSource="{Binding TeamInformation}" HasUnevenRows="True"
+                                  Margin="0, 0, 0, 0" SeparatorVisibility="None" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="5,0,0,5">
+                                <!--<BoxView BackgroundColor="#F5F5F5">
+                    <Label Text="STAFF" TextColor="Black"></Label>
+                </BoxView>-->
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                                             BackgroundColor="#F5F5F5" 
+                                             HeightRequest="40">
+                                        <Label Text="STAFF" VerticalTextAlignment="Center"
+                                           VerticalOptions="Center" FontAttributes="Bold"></Label>
+                                    </StackLayout>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Presidente"></Label>
+                                    <Label Grid.Row="2" Grid.Column="0" Text="GerenteGeneral"></Label>
+                                    <Label Grid.Row="3" Grid.Column="0" Text="Comunicaciones"></Label>
+                                    <Label Grid.Row="4" Grid.Column="0" Text="Dirigente"></Label>
+                                    <Label Grid.Row="5" Grid.Column="0" Text="1er Asistente"></Label>
+                                    <Label Grid.Row="6" Grid.Column="0" Text="2do Asistente"></Label>
+
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding PresidenteEquipo}"></Label>
+                                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding GerenteGeneral}"></Label>
+                                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding DirectorPrensa}"></Label>
+                                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding Dirigente}"></Label>
+                                    <Label Grid.Row="5" Grid.Column="1" Text="{Binding PrimerAsistente}"></Label>
+                                    <Label Grid.Row="6" Grid.Column="1" Text="{Binding SegundoAsistente}"></Label>
+                                </Grid>
+
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

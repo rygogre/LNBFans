@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              
+             xmlns:converters="clr-namespace:nLNBFans.Converters;assembly=nLNBFans"
+             x:Class="nLNBFans.Pages.LeadersPage"
+             Title="Estadísticas">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Add" Text="Add" Icon="filter.png" Activated="OnNewClicked" Order="Primary" Priority="0" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:URLImagenPlayer x:Key="urlImagenPlayer"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor="{StaticResource MainColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="2"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="60"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <!--<ColumnDefinition Width="*"></ColumnDefinition>-->
+                </Grid.ColumnDefinitions>
+
+                <Picker x:Name="categoriaPicker" BackgroundColor="#01579b" Grid.Column="0" Grid.Row="0" Margin="0, 5, 0, 0" TextColor="White"
+                    
+                    Title="Categoria">
+                    <Picker.Items>
+                        <x:String>Puntos</x:String>
+                        <x:String>Rebotes</x:String>
+                        <x:String>Asistencias</x:String>
+                        <x:String>Tiros de campo</x:String>
+                        <x:String>Tiros de tres</x:String>
+                        <x:String>Tiros libres</x:String>
+                        <x:String>Robos</x:String>
+                        <x:String>Perdidas</x:String>
+                        <x:String>Minutos</x:String>
+                        <x:String>Bloqueos</x:String>
+                        <x:String>Faltas</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Picker x:Name="yearPicker" BackgroundColor="#01579b" Grid.Column="1" Grid.Row="0" Title="Temp." Margin="0, 5, 0, 0" TextColor="White">
+                    <Picker.Items>
+                        <x:String>2018</x:String>
+                        <x:String>2017</x:String>
+                        <x:String>2016</x:String>
+                        <x:String>2015</x:String>
+                        <x:String>2014</x:String>
+                        <x:String>2013</x:String>
+                        <x:String>2012</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Picker x:Name="etapaPicker" BackgroundColor="#01579b" Grid.Column="2" Grid.Row="0" Margin="0, 5, 0, 0" TextColor="White"
+                    Title="Etapa">
+                    <Picker.Items>
+                        <x:String>S. Regular</x:String>
+                        <x:String>SemiFinal</x:String>
+                        <x:String>S. Final</x:String>
+                    </Picker.Items>
+                </Picker>
+
+
+                <BoxView Color="#01579b"
+                         HeightRequest="2"
+                         Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"/>
+            </Grid>
+
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b"></ActivityIndicator>
+            <ListView ItemsSource="{Binding LeaderShort}" HasUnevenRows="True" 
+                              Margin="3" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" Margin="0, 0, 0, 5">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectCommand}" CommandParameter="{Binding IDPlayer}"></TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="25"></RowDefinition>
+                                    <RowDefinition Height="25"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="65"></ColumnDefinition>
+                                    <ColumnDefinition Width="25"></ColumnDefinition>
+                                    <ColumnDefinition Width="45"></ColumnDefinition>
+                                    <ColumnDefinition Width="35"></ColumnDefinition>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="0, 10, 0, 10"                                    
+                                    Source="{Binding Imagen, Converter={StaticResource urlImagenPlayer}}"
+                                    WidthRequest="60" HeightRequest="60" />
+
+                                <Label TextColor="Black" FontSize="16" Margin="5, 10, 0, 0"
+                                Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                            Text="{Binding NombrePlayer}" />
+
+                                <Label
+                                Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4"  FontSize="12" Margin="5, 0, 0, 10"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                
+                            Text="{Binding NombreEquipo}" />
+
+                                <Label
+                                Grid.Row="2" Grid.Column="1" FontSize="12"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                            Text="JJ" />
+
+                                <Label
+                                Grid.Row="2" Grid.Column="2" FontSize="12" FontAttributes="Bold"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                                Text="{Binding JJ}" />
+
+                                <Label
+                                Grid.Row="2" Grid.Column="3" FontSize="12" 
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                                Text="{Binding Area}" />
+
+                                <Label
+                                Grid.Row="2" Grid.Column="4" FontSize="12" FontAttributes="Bold"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                                Text="{Binding AreaValor}" />
+
+                                <Label
+                                Grid.Row="0" Grid.Column="5" Grid.RowSpan="3" FontSize="25"  TextColor="Black" FontAttributes="Bold" 
+                                VerticalOptions="Center" HorizontalOptions="End"  Margin="0,0,10,0"                                 
+                                Text="{Binding AreaValorPromedio}" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout VerticalOptions="End" BackgroundColor="Transparent" Margin="0" Padding="0">
+                <WebView BackgroundColor="Transparent" HeightRequest="70" Margin="0, 0, 0, 0" HorizontalOptions="Fill" VerticalOptions="Fill" >
+                    <WebView.Source >
+                        <HtmlWebViewSource Html="{Binding PublicidadHTML}"></HtmlWebViewSource>
+                    </WebView.Source>
+                </WebView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

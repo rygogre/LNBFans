@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nLNBFans.App">
+	<Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="MainColor">#01579b</Color>
+            <Color x:Key="BackgroundColor">#f9f9f9</Color>
+            <Color x:Key="MenuBG">#dcedc8</Color>
+            <!-- Application resource dictionary -->
+            <Style x:Key="labelHeaderList" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style x:Key="labelCompareTeamStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style ApplyToDerivedTypes="true" TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Key=MainColor}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

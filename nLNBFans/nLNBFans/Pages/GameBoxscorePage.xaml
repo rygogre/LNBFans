@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:converters="clr-namespace:nLNBFans.Converters;assembly=nLNBFans"
+             x:Class="nLNBFans.Pages.GameBoxscorePage"
+             Title="Boxscore"
+              Icon="boxscore.png"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:URLImagenPlayer x:Key="urlImagenPlayer"/>
+            <converters:CaseConverter x:Key="caseConverter"/>
+            <converters:HasBorderConverter x:Key="hasBorderConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+       
+        <StackLayout>
+            <ActivityIndicator 
+             IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b">
+            </ActivityIndicator>
+
+            <StackLayout Grid.Row="2" Grid.Column="0" >
+                <Grid BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="2"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label VerticalOptions="Center" TextColor="#01579b" Grid.Column="0" Grid.Row="0" Margin="0,8,0,0"
+                            Text="{Binding GameDay.Visita, Converter={StaticResource caseConverter}}" HorizontalTextAlignment="Center" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TeamBoxScoreVisitaCommand}" CommandParameter="{Binding GameDay.IDEquipoVisita}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label Text="|" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontFamily="20"
+                       TextColor="#EEEEEE" Grid.Column="1" Grid.Row="0" Margin="0,5,0,0" />
+
+                    <BoxView Color="{Binding HasBordeVisita}" HeightRequest="2"
+                          Grid.Column="0" Grid.Row="2"/>
+
+
+
+                    <Label VerticalOptions="Center" TextColor="#01579b" Grid.Column="2" Grid.Row="0" Margin="0,8,0,0"
+                            Text="{Binding GameDay.Casa, Converter={StaticResource caseConverter}}" HorizontalTextAlignment="Center"  FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TeamBoxScoreCasaCommand}" CommandParameter="{Binding GameDay.IDEquipoCasa}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <BoxView Color="{Binding HasBordeCasa}"
+                         HeightRequest="2"
+                         Grid.Column="2" Grid.Row="2"/>
+                </Grid>
+            </StackLayout>
+
+
+            <ListView ItemsSource="{Binding BoxScore}" HasUnevenRows="True" 
+                              Margin="5" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" Margin="0, 0, 0, 8">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectCommand}" CommandParameter="{Binding IDPlayer}"></TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="10"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="35"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="35"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="40"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="35"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+
+                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0, 5, 0, 0"                                    
+                                    Source="{Binding Imagen, Converter={StaticResource urlImagenPlayer}}"
+                                    WidthRequest="50" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                                <Label TextColor="Black" FontSize="18" Margin="3, 2, 0, 0"
+                                Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6"
+                                VerticalOptions="Center" HorizontalOptions="Start"                                   
+                            Text="{Binding NombreCompleto}" />
+
+                                <Label HorizontalOptions="Center"
+                                Grid.Row="1" Grid.Column="2"
+                                VerticalOptions="Center"                                
+                            Text="PTS" />
+
+                                <Label HorizontalOptions="Start"  VerticalOptions="Center"   
+                                Grid.Row="1" Grid.Column="4"                                
+                                Text="REB" />
+
+                                <Label HorizontalOptions="Center"  VerticalOptions="Center"   
+                                Grid.Row="1" Grid.Column="6"                                
+                                Text="AS" />
+
+                                <Label 
+                                Grid.Row="1" Grid.Column="3" FontAttributes="Bold"
+                                VerticalOptions="Center" HorizontalOptions="Start" Margin="10, 0, 0, 0"                                   
+                            Text="{Binding Ptos, StringFormat='{}{0:0}'}" />
+
+                                <Label  VerticalOptions="Center"   
+                                Grid.Row="1" Grid.Column="5" FontAttributes="Bold"                                
+                                Text="{Binding REB, StringFormat='{}{0:0}'}" />
+
+                                <Label  VerticalOptions="Center"   
+                                Grid.Row="1" Grid.Column="7" FontAttributes="Bold"                               
+                                Text="{Binding Asist, StringFormat='{}{0:0}'}" />
+
+                                <StackLayout Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="8" HeightRequest="2" Margin="0, 5, 0, 0">
+                                    <BoxView Color="#EEEEEE" HeightRequest="1" />
+                                </StackLayout>
+
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="0"                                
+                                Text="TC" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="0"                                
+                                Text="T3" />
+                                <Label 
+                                Grid.Row="5" Grid.Column="0"                                
+                                Text="TL" />
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="1"                                
+                                Text="{Binding PCTTC, StringFormat='{}{0:0}%'}" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="1"                                
+                                Text="{Binding PCTT3, StringFormat='{}{0:0}%'}" />
+                                <Label 
+                                Grid.Row="5" Grid.Column="1"                                
+                                Text="{Binding PCTTL, StringFormat='{}{0:0}%'}" />
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="2"                                
+                                Text="TC" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="2"                                
+                                Text="T3" />
+                                <Label 
+                                Grid.Row="5" Grid.Column="2"                                
+                                Text="TL" />
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="3"                                
+                                Text="{Binding TC}" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="3"                                
+                                Text="{Binding T3}" />
+                                <Label 
+                                Grid.Row="5" Grid.Column="3"                                
+                                Text="{Binding TL}" />
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="4"                                
+                                Text="MIN" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="4"                                
+                                Text="BP" />
+                                <Label 
+                                Grid.Row="5" Grid.Column="4"                                
+                                Text="BR" />
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="5"                                
+                                Text="{Binding Minutos, StringFormat='{}{0:0}'}" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="5"                                
+                                Text="{Binding BP, StringFormat='{}{0:0}'}" />
+                                <Label 
+                                Grid.Row="5" Grid.Column="5"                                
+                                Text="{Binding BR, StringFormat='{}{0:0}'}" />
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="6"                                
+                                Text="RO" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="6"                                
+                                Text="RD" />
+
+                                <Label 
+                                Grid.Row="5" Grid.Column="6"                                
+                                Text="FP" />
+
+                                <Label 
+                                Grid.Row="3" Grid.Column="7"                                
+                                Text="{Binding ROF, StringFormat='{}{0:0}'}" />
+                                <Label 
+                                Grid.Row="4" Grid.Column="7"                                
+                                Text="{Binding DEF, StringFormat='{}{0:0}'}" />
+                                <Label 
+                                Grid.Row="5" Grid.Column="7"                                
+                                Text="{Binding FP, StringFormat='{}{0:0}'}" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

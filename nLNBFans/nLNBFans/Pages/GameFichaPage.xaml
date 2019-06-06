@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:nLNBFans.Converters;assembly=nLNBFans"
+             x:Class="nLNBFans.Pages.GameFichaPage"
+             Title="Ficha"
+             Icon="scoreboard.png"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ColorConverter x:Key="colorConverter"/>
+            <converters:CaseConverter x:Key="caseConverter"/>
+            <converters:VisibleColumnConverter x:Key="visibleColumnConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="share" Text="Add" Icon="share.png" Activated="OnShareClicked" Order="Primary" Priority="0" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b">
+                </ActivityIndicator>
+
+                <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="{StaticResource MainColor}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Image WidthRequest="45" HeightRequest="45"   Margin="0,5,0,0"                 
+                                    Grid.Row="1" Grid.Column="0"
+                                    Source="{Binding Game.LogoEquipo, StringFormat='http://deportes56.com/Imagenes/Equipos/LNB/{0}'}">
+                    </Image>
+
+                    <Label HorizontalTextAlignment="Center" FontSize="18" TextColor="White"
+                                    Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                                    VerticalOptions="Center" HorizontalOptions="Center"                                   
+                                    Text="{Binding Game.ScoreFinal}" />
+
+                    <Image WidthRequest="45" HeightRequest="45"     Margin="0,5,0,0"                       
+                                    Grid.Row="1" Grid.Column="2"
+                                    Source="{Binding Game.LogoVisita, StringFormat='http://deportes56.com/Imagenes/Equipos/LNB/{0}'}">
+                    </Image>
+
+                    <Label FontSize="14" FontAttributes="Bold" TextColor="White"
+                                    Grid.Row="2" Grid.Column="0"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding Game.Visita}" />
+
+                    <Label FontSize="14" FontAttributes="Bold" TextColor="White"
+                                    Grid.Row="2" Grid.Column="2"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding Game.Casa}" />
+
+                    <Label FontSize="12" Margin="0,0,0,5"
+                                    Grid.Row="3" Grid.Column="0" TextColor="White"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding Game.RecordVisita}" />
+
+                    <Label FontSize="12" Margin="0,0,0,5"
+                                    Grid.Row="3" Grid.Column="2" TextColor="White"
+                                    VerticalOptions="Center"  HorizontalTextAlignment="Center"                                  
+                                    Text="{Binding Game.RecordCasa}" />
+                </Grid>
+
+
+
+                <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="{Binding GameScoreTime.TEVisita, Converter={StaticResource visibleColumnConverter}}"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="Equipos" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="1T" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="2T" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="3T" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="4T" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="5" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="TE" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="0" Grid.Column="6" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="TOT" />
+
+                    <Label HorizontalTextAlignment="Start" Margin="5,0,0,0"
+                   Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding Game.Visita}" />
+
+                    <Label HorizontalTextAlignment="Start" Margin="5,0,0,0"
+                   Grid.Row="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding Game.Casa}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.PVisita}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.PCasa}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.SVisita}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.SCasa}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.TVisita}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.TCasa}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.CVisita}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.CCasa}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="5" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.TEVisita}" />
+
+                    <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="5" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.TECasa}" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="1" Grid.Column="6" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.FinalVisita}" />
+
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold"
+                   Grid.Row="2" Grid.Column="6" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding GameScoreTime.FinalCasa}" />
+                </Grid>
+
+
+                <StackLayout BackgroundColor="Transparent" Margin="0" Padding="0">
+                    <WebView BackgroundColor="Transparent" HeightRequest="70" Margin="0, 0, 0, 0" HorizontalOptions="Fill" VerticalOptions="Fill" >
+                        <WebView.Source >
+                            <HtmlWebViewSource Html="{Binding PublicidadHTML}"></HtmlWebViewSource>
+                        </WebView.Source>
+                    </WebView>
+                </StackLayout>
+
+                <StackLayout>
+                    <Grid RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" VerticalOptions="Start" Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition Height="400"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="15,0,0,0"
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="COMPARACIÓN EQUIPOS" />
+
+                        <Label FontAttributes="Bold" Margin="10,0,0,0"
+                           TextColor="{Binding Game.ColorEquipoVisita, Converter={StaticResource colorConverter}}"
+                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding Game.Visita, Converter={StaticResource caseConverter}}" />
+
+                        <Label FontAttributes="Bold" Margin="0,0,10,0" Grid.ColumnSpan="3"
+                           TextColor="{Binding Game.ColorEquipoCasa, Converter={StaticResource colorConverter}}"
+                   Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding Game.Casa, Converter={StaticResource caseConverter}}" />
+
+
+                        <Grid Margin="10, 5, 5, 5" RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" Grid.Column="0" Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <!--<Label HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="{Binding Game.ColorEquipoVisita, Converter={StaticResource colorConverter}}"
+                   Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding Game.Visita, Converter={StaticResource caseConverter}}" />-->
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="1" Grid.Column="0"                                   
+                   Text="{Binding GameTotalsVisita.PCTTC, StringFormat='{0:0}%'}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.PCTT3, StringFormat='{0:0}%'}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="3" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.PCTTL, StringFormat='{0:0}%'}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="4" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.Asist}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="5" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.TR}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="6" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.ROF}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="7" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.DEF}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="8" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.TC}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="9" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.T3}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="10" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start"                                   
+                   Text="{Binding GameTotalsVisita.TL}" />
+                        </Grid>
+
+
+
+                        <Grid Margin="5" RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" Grid.Column="1" Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"></RowDefinition>
+                                <RowDefinition Height="45"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label HorizontalTextAlignment="Center"
+                   Grid.Row="0" Grid.Column="0"  HorizontalOptions="Center"                                   
+                   Text=" " />
+
+                            <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="1" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="%TC" />
+
+                            <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="2" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="%T3" />
+
+                            <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="3" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="%TL" />
+
+                            <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="4" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="Asistencias" />
+
+                            <Label HorizontalTextAlignment="Center"
+                   Grid.Row="5" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="Total rebotes" />
+
+                            <Label HorizontalTextAlignment="Center"
+                   Grid.Row="6" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="Rebotes ofensivos" />
+
+                            <Label HorizontalTextAlignment="Center"
+                   Grid.Row="7" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="Rebotes defensivos" />
+
+                            <Label HorizontalTextAlignment="Center"
+                   Grid.Row="8" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="Tiros de Campo" />
+
+                            <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="9" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="Tiros de tres" />
+
+                            <Label HorizontalTextAlignment="Center" 
+                   Grid.Row="10" Grid.Column="0" HorizontalOptions="Center"                                   
+                   Text="Tiros libres" />
+                        </Grid>
+
+
+                        <Grid Margin="5, 5, 10, 5" RowSpacing="0" ColumnSpacing="0" BackgroundColor="White"  Grid.Column="2" Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"></RowDefinition>
+                                <RowDefinition Height="35"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <!--<Label HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="{Binding Game.ColorEquipoCasa, Converter={StaticResource colorConverter}}"
+                   Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"                                   
+                   Text="{Binding Game.Casa, Converter={StaticResource caseConverter}}" />-->
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="1" Grid.Column="0"   VerticalOptions="Center" HorizontalOptions="End"             
+                   Text="{Binding GameTotalsCasa.PCTTC, StringFormat='{0:0}%'}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="2" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.PCTT3, StringFormat='{0:0}%'}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="3" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.PCTTL, StringFormat='{0:0}%'}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="4" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.Asist}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="5" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.TR}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="6" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.ROF}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="7" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.DEF}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="8" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.TC}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="9" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.T3}" />
+
+                            <Label Style="{StaticResource labelCompareTeamStyle}" 
+                   Grid.Row="10" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="End"                                   
+                   Text="{Binding GameTotalsCasa.TL}" />
+                        </Grid>
+                        <!--</ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
+
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

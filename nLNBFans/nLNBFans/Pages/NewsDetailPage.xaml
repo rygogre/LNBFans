@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="nLNBFans.Pages.NewsDetailPage"
+             Title="Detalles">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="share" Text="Add" Icon="share.png" Activated="OnShareClicked" Order="Primary" Priority="0" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center" Color="#01579b"></ActivityIndicator>
+                  <WebView x:Name="descripcionWebView"></WebView>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

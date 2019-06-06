@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1092952832050",
+    "firebase_url": "https://lnbapp-4d4f2.firebaseio.com",
+    "project_id": "lnbapp-4d4f2",
+    "storage_bucket": "lnbapp-4d4f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092952832050:android:7d69d199eec28ee1",
+        "android_client_info": {
+          "package_name": "com.lnbfans.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092952832050-kp85k9ubp9dpe02clptboqhri5gic32k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoO5HrJSF41spJR875M8tcv6dicSJCC8w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
